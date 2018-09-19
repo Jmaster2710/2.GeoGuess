@@ -23,7 +23,6 @@ public class GeoObjectAdapter extends RecyclerView.Adapter<GeoObjectViewHolder> 
 
     }
 
-
     @Override
     public GeoObjectViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 

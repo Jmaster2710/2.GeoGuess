@@ -1,5 +1,7 @@
 package com.example.joel_.week2level2;
 
+import android.support.v7.widget.RecyclerView;
+
 public class GeoObject {
     private String mGeoName;
     private int mGeoImageName;
