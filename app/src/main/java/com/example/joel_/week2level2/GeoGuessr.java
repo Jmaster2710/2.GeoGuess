@@ -31,7 +31,7 @@ public class GeoGuessr extends AppCompatActivity {
         //Assigning the layout manager.
         RecyclerView mGeoRecyclerView = findViewById(R.id.recyclerView);
 
-        RecyclerView.LayoutManager mLayoutManager = new StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL);
+        RecyclerView.LayoutManager mLayoutManager = new StaggeredGridLayoutManager(1, LinearLayoutManager.VERTICAL);
 
         mGeoRecyclerView.setLayoutManager(mLayoutManager);
         GeoObjectAdapter mAdapter = new GeoObjectAdapter(this, mGeoObjects);
