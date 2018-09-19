@@ -7,6 +7,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.support.design.widget.Snackbar;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +20,7 @@ public class GeoGuessr extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_geo_guessr);
 
-        List<GeoObject> mGeoObjects = new ArrayList<>();
+        final List<GeoObject> mGeoObjects = new ArrayList<>();
 
         for (int i = 0; i < GeoObject.PRE_DEFINED_GEO_OBJECT_NAMES.length; i++) {
 
@@ -38,13 +40,6 @@ public class GeoGuessr extends AppCompatActivity {
         GeoObjectAdapter mAdapter = new GeoObjectAdapter(this, mGeoObjects);
         mGeoRecyclerView.setAdapter(mAdapter);
 
-
-
-/*
-Add a touch helper to the RecyclerView to recognize when a user swipes to delete a list entry.
-An ItemTouchHelper enables touch behavior (like swipe and move) on each ViewHolder,
-and uses callbacks to signal when a user is performing these actions.
-*/
 
         ItemTouchHelper.SimpleCallback simpleItemTouchCallback =
 
@@ -66,10 +61,42 @@ and uses callbacks to signal when a user is performing these actions.
                     public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
 
                         //Get the index corresponding to the selected position
-
+                        String message = "";
                         int position = (viewHolder.getAdapterPosition());
-                        //mReminders.remove(position);
-                        //mAdapter.notifyItemRemoved(position);
+                        Log.d("myTag", String.valueOf(position));
+                        //Swiping to europe
+                        if (swipeDir == ItemTouchHelper.LEFT)
+                        {
+                            if (mGeoObjects.get(position).getmIsEurope())
+                            {
+                                message += "Congrats! ";
+                            } else
+                            {
+                                message += "Too bad! ";
+                            }
+
+                        } else
+                        if (swipeDir == ItemTouchHelper.RIGHT)
+                        {
+                            if (!mGeoObjects.get(position).getmIsEurope())
+                            {
+                                message += "Too bad! ";
+                            } else
+                            {
+                                message += "Congrats! ";
+                            }
+                        }
+
+                        message += mGeoObjects.get(position).getmGeoImageName();
+                        if (mGeoObjects.get(position).getmIsEurope())
+                        {
+                            message += " is part of Europe!";
+                        } else
+                        {
+                            message += " is not part of Europe!";
+                        }
+
+                        Log.d("myTag", message);
                     }
 
                 };
