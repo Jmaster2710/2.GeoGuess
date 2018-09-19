@@ -10,6 +10,7 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +34,7 @@ public class GeoGuessr extends AppCompatActivity {
         }
 
         //Assigning the layout manager.
-        RecyclerView mGeoRecyclerView = findViewById(R.id.recyclerView);
+        final RecyclerView mGeoRecyclerView = findViewById(R.id.recyclerView);
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 1);
 
         mGeoRecyclerView.setLayoutManager(mLayoutManager);
@@ -80,14 +81,14 @@ public class GeoGuessr extends AppCompatActivity {
                         {
                             if (!mGeoObjects.get(position).getmIsEurope())
                             {
-                                message += "Too bad! ";
+                                message += "Congrats! ";
                             } else
                             {
-                                message += "Congrats! ";
+                                message += "Too Bad! ";
                             }
                         }
 
-                        message += mGeoObjects.get(position).getmGeoImageName();
+                        message += mGeoObjects.get(position).getmGeoName();
                         if (mGeoObjects.get(position).getmIsEurope())
                         {
                             message += " is part of Europe!";
@@ -95,8 +96,10 @@ public class GeoGuessr extends AppCompatActivity {
                         {
                             message += " is not part of Europe!";
                         }
+                        Snackbar snackbar = Snackbar
+                                .make(mGeoRecyclerView, message, Snackbar.LENGTH_LONG);
 
-                        Log.d("myTag", message);
+                        snackbar.show();
                     }
 
                 };
